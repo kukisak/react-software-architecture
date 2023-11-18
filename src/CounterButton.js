@@ -1,11 +1,11 @@
 import { useState } from "react";
+import { observer } from "mobx-react-lite";
 
-export const CounterButton = () => {
-  const [numberOfClicks, setNumberOfClicks] = useState(0);
+export const CounterButton = observer(({counter}) => {
   const [incrementBy, setIncrementBy] = useState(1);
   return (
       <>
-        <p>You have clicked the buttong {numberOfClicks} times.</p>
+        <p>You have clicked the button {counter.numberOfClicks} times.</p>
         <label>
           Increment By:
           <input
@@ -15,8 +15,8 @@ export const CounterButton = () => {
           />
         </label>
         <button
-          onClick={() => setNumberOfClicks(numberOfClicks + incrementBy)}
+          onClick={() => counter.increment(incrementBy)}
         >Click</button>
       </>
   )
-}
+})
