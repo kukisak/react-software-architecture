@@ -1,7 +1,11 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getNumberOfClicksSelector } from "./selectors";
+import { counterButtonClicked } from "./actions";
 
 export const CounterButton = () => {
-  const [numberOfClicks, setNumberOfClicks] = useState(0);
+  const numberOfClicks = useSelector(getNumberOfClicksSelector)
+  const dispatch = useDispatch();
   const [incrementBy, setIncrementBy] = useState(1);
   return (
       <>
@@ -15,7 +19,7 @@ export const CounterButton = () => {
           />
         </label>
         <button
-          onClick={() => setNumberOfClicks(numberOfClicks + incrementBy)}
+          onClick={() => dispatch(counterButtonClicked(incrementBy))}
         >Click</button>
       </>
   )
