@@ -1,4 +1,5 @@
 import React, { lazy, Suspense, useState } from 'react';
+import ErrorBoundary from "../ErrorBoundary";
 
 const One = lazy(() => import('./One'));
 const Two = lazy(() => import('./Two'));
@@ -10,9 +11,15 @@ export const About = () => {
 				<h1>About</h1>
 				{showComponents && (
 						<Suspense fallback={<p>Loading Components...</p>}>
-							<One/>
-							<Two/>
-							<Three/>
+							<ErrorBoundary>
+								<One/>
+							</ErrorBoundary>
+							<ErrorBoundary>
+								<Two/>
+							</ErrorBoundary>
+							<ErrorBoundary>
+								<Three/>
+							</ErrorBoundary>
 						</Suspense>
 				)}
 				<button onClick={() => setShowComponents(true)}>Show</button>
